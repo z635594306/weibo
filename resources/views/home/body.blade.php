@@ -1,5 +1,5 @@
 <div class="container-fluid" style="background:url(./imgs/body_bg.jpg) no-repeat;">
-    <div class="col-md-8 col-md-offset-2">
+    <div class="col-md-8 col-md-offset-2" style="z-index:2;padding:5px;">
         <div class="row">
             <div class="col-md-2 hidden-xs">
                 <ul id="index-nav">
@@ -24,9 +24,9 @@
                             </div>
                             <div class="row img-box">
                                 <ul>
-                                    <li><img src="holder.js/155x122"></li>
-                                    <li><img src="holder.js/155x122"></li>
-                                    <li><img src="holder.js/155x122"></li>
+                                    <li><img src="holder.js/157x122"></li>
+                                    <li><img src="holder.js/157x122"></li>
+                                    <li><img src="holder.js/157x122"></li>
                                 </ul>
                             </div>
                             <div class="row sub-box">
@@ -282,9 +282,28 @@
                     </li>
                 </ul>
             </div>
-            <div class="col-md-3 hidden-xs">
-                
+            <div class="col-md-3 hidden-xs" id="hot-talk">
+                <div class="row" id="hot-talk-btn">
+                    <b class="hv-orange">热门话题</b><a href="" class="pull-right hv-orange"><span class="glyphicon glyphicon-refresh"> </span> 换一换 </a>
+                </div>
+                <div class="row" id="hot-talk-list">
+                    <ul>
+                        <li><a href="" class="hv-orange">#王宝强离婚#</a> <span class="pull-right">300万</span></li>
+                        <li><a href="" class="hv-orange">#王宝强离婚#</a> <span class="pull-right">300万</span></li>
+                        <li><a href="" class="hv-orange">#王宝强离婚#</a> <span class="pull-right">300万</span></li>
+                        <li><a href="" class="hv-orange">#王宝强离婚#</a> <span class="pull-right">300万</span></li>
+                        <li><a href="" class="hv-orange">#王宝强离婚#</a> <span class="pull-right">300万</span></li>
+                        <li><a href="" class="hv-orange">#王宝强离婚#</a> <span class="pull-right">300万</span></li>
+                        <li><a href="" class="hv-orange">#王宝强离婚#</a> <span class="pull-right">300万</span></li>
+                        <li><a href="" class="hv-orange">#王宝强离婚#</a> <span class="pull-right">300万</span></li>
+                        <li><a href="" class="hv-orange">#王宝强离婚#</a> <span class="pull-right">300万</span></li>
+                    </ul>
+                </div>
+                <div class="row" id="hot-talk-more">
+                    <a href="" class="hv-orange">查看更多 ></a>
+                </div>
             </div>
         </div>
     </div>
+    <div class="col-md-8 col-md-offset-2" id="body-bg"></div>
 </div>

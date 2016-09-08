@@ -16,7 +16,7 @@
               <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
     </head>
-    <body>
+    <body style="background-color:@yield('body-bgcolor');">
         @yield('content')
 
 
