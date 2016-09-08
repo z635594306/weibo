@@ -4,13 +4,12 @@
 }
 
 ol,ul {list-style: none;}
-a{text-decoration:none!important;}
-a:link {color:#000000;text-decoration:none!important;}     /* 未被访问的链接     */
-a:visited {color:#000000}  /* 已被访问过的链接    */
-a:hover {text-decoration:none!important;}    /* 鼠标悬浮在上的链接  */
-a:active {color:#000000}   /* 鼠标点中激活链接    */
-
-
+a{color:#555;}
+a:link{}
+a:visited{}
+a:hover{text-decoration: none!important;color: #ED741C;
+}}
+a:active{}
 .hv-white:hover{
     color: #fff;
 }
@@ -175,11 +174,6 @@ body{
     margin-top: 5px!important;
 }
 
-.sub-box span{
-    color: #777;
-    font-size: 12px;
-}
-
 
 .weibo-btn{
     margin-right: 15px;
@@ -200,9 +194,6 @@ body{
     color: #000;
 }
 
-.weibo-btn>.glyphicon:hover{
-    color:#f00;
-}
 
 #body-bg{
     height: 100%;
@@ -213,9 +204,14 @@ body{
 }
 
 
-#hot-talk{
-    background:#fff;
+#hot-box{
     margin-top:10px;
+    
+}
+
+#hot-box>div{
+    margin-bottom: 10px;
+    background-color: #fff;
     border-radius:3px;
 }
 
@@ -241,11 +237,59 @@ body{
 
 #hot-talk-list li{
     margin-bottom: 10px;
-    font-size: 14px;
+    font-size: 12px;
+    color: #888;
 }
 
 #hot-talk-more{
     line-height: 38px;
     border-top: 1px solid #ccc;
-    padding: 1px 40%;
+}
+
+.face-box-sm{
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+.top-person{
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
+}
+
+.top-person:nth-last-of-type(1){
+    border-bottom: 1px solid #fff;
+    padding-bottom: 1px;
+    margin-bottom: 0px!important;
+    /*background-color: #000;*/
+}
+
+.top-person-list{margin-bottom:0px;}
+
+.btn-box{
+    font-size: 12px;
+    color: #aaa!important;
+}
+
+#talk-list a{
+    color: #000;
+}
+
+#talk-list a:hover{
+    color: #ED741C;
+}
+
+.btn-box a{
+    color:#777;
+}
+
+.btn-box a:hover{
+    color:#ED741C;
+}
+
+.person-info{
+    display: inline-block;
+    margin-top: 5px;
+    margin-left: 2px;
 }

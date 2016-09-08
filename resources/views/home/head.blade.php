@@ -24,7 +24,8 @@
                 <ul id="top-nuv">
                     <li><span class="glyphicon glyphicon-home nuv-ico"> </span> 首页 </li>
                     <li><span class="glyphicon glyphicon-gift nuv-ico"> </span> 发现 </li>
-                    <li>注册&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;登陆</li>
+                    <li>注册</li>
+                    <li>登陆</li>
                 </ul>
             </div>
         </div>
