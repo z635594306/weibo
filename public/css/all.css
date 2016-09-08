@@ -1,8 +1,14 @@
 *{
     margin: 0px 0px;
     padding: 0px 0px;
-    list-style: none;
 }
+
+ol,ul {list-style: none;}
+a{text-decoration:none!important;}
+a:link {color:#000000;text-decoration:none!important;}     /* 未被访问的链接     */
+a:visited {color:#000000}  /* 已被访问过的链接    */
+a:hover {text-decoration:none!important;}    /* 鼠标悬浮在上的链接  */
+a:active {color:#000000}   /* 鼠标点中激活链接    */
 
 .mt-5{
     margin-top: 5px;
@@ -83,6 +89,13 @@
     color: #00f;
 }
 
+body{
+    background-image: url(../imgs/body_repeat.png);
+}
+
+#top-post{height: 48px;}
+#top-box{position: fixed;z-index: 999;width:100%;}
+
 #top{
     height: 48px;
 }
@@ -100,3 +113,84 @@
 .nuv-ico{
     font-size: 20px;
 }
+
+#index-nav li{
+    height: 34px;
+    width: 100%;
+    line-height: 34px;
+    margin-top: 10px;
+    text-align: center;
+    font-size: 16px;
+    font-family: '微软雅黑';
+    color:#fff;
+}
+
+#index-nav a{
+    color:#fff;
+    /*text-decoration:none;*/
+}
+
+#index-nav{
+    position: fixed;
+}
+
+#index-nav li{
+    width: 130px;
+}
+
+#index-nav li:hover{
+    background-color:rgba(255,255,255,0.4);
+
+}
+
+.weibo-content{
+    background-color: #fff;
+    margin-top: 10px;
+    padding:10px!important;
+    border-radius: 3px;
+}
+
+.img-box li{
+    float: left;
+    margin:0px 1px;
+    width: 155px;
+    height: 122px;
+}
+
+.weibo-content div{
+    margin: 2px;
+}
+
+.sub-box{
+    margin-top: 5px!important;
+}
+
+.sub-box span{
+    color: #777;
+    font-size: 12px;
+}
+
+
+.weibo-btn{
+    margin-right: 15px;
+    margin-top: 5px;
+}
+
+.text-box{
+    font-size: 12px;
+    line-height: 20px;
+    color: #777;
+}
+
+.weibo-title{
+    font-size: 18px;
+    font-family: '微软雅黑';
+    display: block;
+    margin-bottom: 5px;
+    color: #000;
+}
+
+.weibo-btn>.glyphicon:hover{
+    color:#f00;
+}
+
