@@ -1,8 +1,8 @@
-var reg_phone = /^1[^1269][\d]\d{8}$/;
+var reg_phone = /^\w+[@]\w+[.]+\w+$/;
 var reg_pwd = /^\w{6,16}$/;
 
 $("#phone").focus(function(){
-    $(".error").eq(0).find("span:last").html("手机号长度11位，以13/14/15/17/18开头").css("color","#888");
+    $(".error").eq(0).find("span:last").html("请输入您的常用邮箱").css("color","#888");
     $(".error").eq(0).find("span:first").attr("class","glyphicon glyphicon-exclamation-sign error-ico").css("color","#41A8FF");
     $(".error").eq(0).css("display","inline-block");
 });
@@ -20,7 +20,7 @@ $("#test").focus(function(){
 
 $("#phone").blur(function(){
     if (!reg_phone.test(this.value)) {
-        $(".error").eq(0).find("span:last").html("手机号码不正确,请重新输入").css("color","red");
+        $(".error").eq(0).find("span:last").html("邮箱号码不正确,请重新输入").css("color","red");
         $(".error").eq(0).find("span:first").attr("class","glyphicon glyphicon-remove error-ico").css("color","#FF5F00");
     }else{
         $(".error").eq(0).css("display","none");

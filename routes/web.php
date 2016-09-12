@@ -16,9 +16,8 @@ Route::get('/', function () {
 });
 
 
-Route::get('/reg', function () {
-    return view('home.reg');
-});
+Route::get('/reg', 'RegController@index');
+Route::post('/reg', 'RegController@doreg');
 
 Route::get('/head', function () {
     return view('home.head');

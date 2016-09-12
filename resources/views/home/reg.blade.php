@@ -28,23 +28,23 @@
                     </div>
                     <div class="row mt-20">
                         <div class="col-md-9">
-                            <form class="form-horizontal col-md-12">
+                            <form class="form-horizontal col-md-12" action="./reg" method="post">
                                 <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
                                 <div class="form-group">
-                                    <label for="inputEmail3" class="col-sm-3 control-label"><span class="glyphicon glyphicon-phone"> </span><span class="text-red"> * </span>手机</label>
+                                    <label for="inputEmail3" class="col-sm-3 control-label"><span class="glyphicon glyphicon-envelope"> </span><span class="text-red"> * </span>电子邮箱</label>
                                     <div class="col-sm-5">
-                                        <input type="phone" class="form-control" id="phone" placeholder="请输入您的手机号码" maxlength="11">
+                                        <input type="email" name="email" class="form-control" id="phone" placeholder="请输入您的手机号码" maxlength="30">
                                     </div>
                                     <div class="col-sm-4">
                                         <span class="error">
                                             <span class="glyphicon glyphicon-exclamation-sign error-ico"></span>
-                                            <span class="error-text"> 手机号长度11位，以13/14/15/17/18开头 </span>
+                                            <span class="error-text"> 请输入您的常用邮箱 </span>
                                         </span>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputPassword3" class="col-sm-3 control-label"><span class="glyphicon glyphicon-lock"> </span><span class="text-red"> * </span>设置密码</label>
-                                    <div class="col-sm-5"> <input type="password" class="form-control" id="pwd"  placeholder="请输入密码" maxlength="16"> </div>
+                                    <div class="col-sm-5"> <input type="password" name="pwd" class="form-control" id="pwd"  placeholder="请输入密码" maxlength="16"> </div>
                                     <div class="col-sm-4">
                                         <span class="error">
                                             <span class="glyphicon glyphicon-exclamation-sign error-ico"></span>
@@ -53,13 +53,13 @@
                                     </div>
                                 </div>
                                 <div class="form-group ">
-                                    <label class="col-sm-3 control-label"><span class="glyphicon glyphicon-envelope"> </span><span class="text-red"> * </span>手机验证</label>
+                                    <label class="col-sm-3 control-label"><span class="glyphicon glyphicon-font"> </span><span class="text-red"> * </span>验证码　</label>
                                     <div class="col-sm-5">
                                         <div class="input-group">
                                             <span class="input-group-btn">  
                                                 <button class="btn btn-info" id="test-button" type="button">发送短信</button>  
                                             </span>
-                                            <input type="text" class="form-control" id="test" placeholder="手机验证码" maxlength="6">
+                                            <input type="text" class="form-control" name="test" id="test" placeholder="手机验证码" maxlength="6">
                                         </div>
                                     </div>
                                     <div class="col-sm-4">
