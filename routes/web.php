@@ -23,3 +23,5 @@ Route::get('/reg', function () {
 Route::get('/head', function () {
     return view('home.head');
 });
+
+Route::get('/mail','MailController@index');
