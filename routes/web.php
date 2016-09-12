@@ -18,9 +18,6 @@ Route::get('/', function () {
 
 Route::get('/reg', 'RegController@index');
 Route::post('/reg', 'RegController@doreg');
+Route::get('/active/token={token}&id={id}','ActiveController@active');
 
-Route::get('/head', function () {
-    return view('home.head');
-});
 
-Route::get('/mail','MailController@index');
