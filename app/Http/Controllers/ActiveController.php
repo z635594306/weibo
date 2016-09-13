@@ -63,6 +63,7 @@ class ActiveController extends Controller
                 );
         });
 
+        //激活成功
         return view('mail.active',['color' => '#03D03D',
                         'message' => '激活成功,兄弟连微博欢迎您',
                         'url' => 'reg',

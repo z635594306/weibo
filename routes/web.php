@@ -14,7 +14,7 @@
 Route::get('/', function () {
     return view('home.index');
 });
-
+Route::get('/captcha/{tmp}', 'CaptchaController@captcha');
 
 Route::get('/reg', 'RegController@index');
 Route::post('/reg', 'RegController@doreg');

@@ -56,16 +56,16 @@
                                     <label class="col-sm-3 control-label"><span class="glyphicon glyphicon-font"> </span><span class="text-red"> * </span>验证码　</label>
                                     <div class="col-sm-5">
                                         <div class="input-group">
-                                            <span class="input-group-btn">  
-                                                <button class="btn btn-info" id="test-button" type="button">发送短信</button>  
+                                            <span class="input-group-addon code">  
+                                                <img src="{{ URL('/captcha/'.time()) }}" onclick="this.src = this.src+ '&i=' + Math.round()">
                                             </span>
-                                            <input type="text" class="form-control" name="test" id="test" placeholder="手机验证码" maxlength="6">
+                                            <input type="text" class="form-control" name="test" id="test" placeholder="验证码" maxlength="4">
                                         </div>
                                     </div>
                                     <div class="col-sm-4">
                                         <span class="error">
                                             <span class="glyphicon glyphicon-exclamation-sign error-ico"></span>
-                                            <span class="error-text"> 请输入短信验证码 </span>
+                                            <span class="error-text"> 验证码不区分大小写 </span>
                                         </span>
                                     </div>
                                 </div>
@@ -78,7 +78,7 @@
                         </div>
                         <div class="col-md-3 hidden-xs" id="reg-box">
                             <div class="row">
-                                <div class="col-md-12" id="go-login"><p>已有账号<a href="">直接登录 >>></a></p></div>
+                                <div class="col-md-12" id="go-login"><p>已有账号<a href="{{ URL('') }}" class="text-red">直接登录 >>></a></p></div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12"><div id="xian"> </div></div>
