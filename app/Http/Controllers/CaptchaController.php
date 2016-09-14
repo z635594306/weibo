@@ -22,6 +22,8 @@ class CaptchaController extends Controller
          */
        
         //1.创建画布,准备颜色
+
+        //宽高
         $img = imagecreatetruecolor(90,32);
         $bg =  imagecolorallocate($img,rand(128,255),rand(128,255),rand(128,255));
           
@@ -29,6 +31,7 @@ class CaptchaController extends Controller
         imagefill($img,0,0,$bg);
         $str =  '3456789wertyupasdfghjkxcvbnmQWERTYUPASDFGHJKXCVBNM';
         $str = str_shuffle($str);
+        //字符串长度
         $str = substr($str,0,4);
 
         $clr = imagecolorallocate($img,rand(0,127),rand(0,127),rand(0,127));
@@ -44,7 +47,7 @@ class CaptchaController extends Controller
             imageline($img,rand(0,100) ,rand(0,30), rand(0,100),rand(0,30), $clr);
         }
 
-        Session::flash('code', strtolower($str));//通过静态方法的方式使用flash
+        Session::put('code', strtolower($str));//通过静态方法的方式使用flash
         // 3. 输出
         header("Cache-Control: no-cache, must-revalidate");
         header('Content-type:image/jpeg');

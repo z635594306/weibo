@@ -39,25 +39,25 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title">注册</h4>
+                <h4 class="modal-title">会员登陆</h4>
             </div>
             <div class="modal-body">
-                <form role="form">
+                <form action="{{ URL('/login') }}" method="post" onsubmit="return login()">
                     <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
                     <div class="form-group">
                         <label>邮箱账号</label>
-                        <input type="email" class="form-control" placeholder="Enter email">
+                        <input type="email" name="email" class="form-control" placeholder="Enter email">
                     </div>
                     <div class="form-group">
                         <label>密码</label>
-                        <input type="password" class="form-control" placeholder="Password">
+                        <input type="password" name="pwd" class="form-control" placeholder="Password">
                     </div> 
                     <label>验证码</label>
                     <div class="input-group">
                         <span class="input-group-addon code">
                             <img src="{{ URL('/captcha/'.time()) }}" onclick="this.src = this.src+ '&i=' + Math.round()">
                         </span>
-                        <input type="text" class="form-control" name="test" id="test" placeholder="验证码/不区分大小写" maxlength="4">
+                        <input type="text" class="form-control" name="code" id="test" placeholder="验证码" maxlength="4">
                     </div>
             </div>
             <div class="modal-footer">

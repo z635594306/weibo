@@ -9,3 +9,7 @@
     @include('home.head')
     @include('home.body')
 @stop
+
+@section('my-js')
+    <script type="text/javascript" src="{{ asset('js/home/login.js') }}"></script>
+@stop
