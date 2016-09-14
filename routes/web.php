@@ -19,23 +19,13 @@
 
 //注册相关
     Route::get('/reg', 'RegController@index');
-    Route::post('/reg', 'RegController@doreg');
+    Route::post('/reg/doreg', 'RegController@doreg');
     //邮箱激活
     Route::get('/active/token={token}&id={id}','ActiveController@active');
 //注册相关
 
 //登陆
-    Route::post('/login', 'LoginController@login')->middleware('code');
-
-//获取验证码值
-    Route::get('/reg/code',function () {
-        return Session::get('code');
-    });
-
-//查询账号是否存在
-    Route::get('/reg/account/{email}',function ($email) {
-        return DB::table('user_login')->where('email','=',$email)->count();
-    });
+    Route::post('/login', 'LoginController@login');
 
 
 

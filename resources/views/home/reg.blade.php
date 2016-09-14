@@ -28,12 +28,12 @@
                     </div>
                     <div class="row mt-20">
                         <div class="col-md-9">
-                            <form class="form-horizontal col-md-12" action="" method="post" onSubmit="return sub();">
-                                <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+                            <form class="form-horizontal col-md-12" action="" method="post" onSubmit="return false">
+                                <input type="hidden" name="_token" id="token" value="<?php echo csrf_token(); ?>">
                                 <div class="form-group">
                                     <label for="inputEmail3" class="col-sm-3 control-label"><span class="glyphicon glyphicon-envelope"> </span><span class="text-red"> * </span>电子邮箱</label>
                                     <div class="col-sm-5">
-                                        <input type="email" name="email" class="form-control" id="phone" placeholder="请输入您的手机号码" maxlength="30">
+                                        <input type="email" name="email" class="form-control" id="email" placeholder="请输入可用的电子邮箱" maxlength="30">
                                     </div>
                                     <div class="col-sm-4">
                                         <span class="error">
@@ -57,9 +57,9 @@
                                     <div class="col-sm-5">
                                         <div class="input-group">
                                             <span class="input-group-addon code";>  
-                                                <img src="{{ URL('/captcha/'.time()) }}" id="code_img" onclick="this.src = this.src+ '&i=' + Math.round()">
+                                                <img src="{{ URL('/captcha/'.time()) }}" name="code" onclick="this.src = this.src+ '&i=' + Math.round()">
                                             </span>
-                                            <input type="text" class="form-control" name="code" id="test" placeholder="验证码" maxlength="4">
+                                            <input type="text" class="form-control" name="code" id="code" placeholder="验证码" maxlength="4">
                                         </div>
                                     </div>
                                     <div class="col-sm-4">
@@ -71,7 +71,7 @@
                                 </div>
                                 <div class="form-group">
                                     <div class="col-sm-offset-3 col-sm-5">
-                                        <button type="submit" class="btn btn-warning col-md-12"><span class="h4">立 即 注 册</span></button>
+                                        <button type="button" onclick="reg()" class="btn btn-warning col-md-12"><span class="h4">立 即 注 册</span></button>
                                     </div>
                                 </div>
                             </form>

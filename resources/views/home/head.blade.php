@@ -42,28 +42,29 @@
                 <h4 class="modal-title">会员登陆</h4>
             </div>
             <div class="modal-body">
-                <form action="{{ URL('/login') }}" method="post" onsubmit="return login()">
-                    <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+                <form action="{{ URL('/login') }}" method="post" name="login_form">
+                    <input type="hidden" name="_token" id="token" value="<?php echo csrf_token(); ?>">
                     <div class="form-group">
                         <label>邮箱账号</label>
-                        <input type="email" name="email" class="form-control" placeholder="Enter email">
+                        <input type="email" name="email" id="email" class="form-control" placeholder="Enter email">
                     </div>
                     <div class="form-group">
                         <label>密码</label>
-                        <input type="password" name="pwd" class="form-control" placeholder="Password">
+                        <input type="password" id="pwd" name="pwd" class="form-control" placeholder="Password">
                     </div> 
                     <label>验证码</label>
                     <div class="input-group">
                         <span class="input-group-addon code">
-                            <img src="{{ URL('/captcha/'.time()) }}" onclick="this.src = this.src+ '&i=' + Math.round()">
+                            <img src="{{ URL('/captcha/'.time()) }}" onclick="this.src = this.src+ '&i=' + Math.round()" name="code">
                         </span>
-                        <input type="text" class="form-control" name="code" id="test" placeholder="验证码" maxlength="4">
+                        <input type="text" class="form-control" name="code" id="code" placeholder="验证码" maxlength="4">
                     </div>
+                </form>
             </div>
             <div class="modal-footer">
                 <a href="{{ URL('/reg') }}" class="btn btn-warning pull-left">注册一个</a>
-                <button type="submit" class="btn btn-info">&nbsp;&nbsp;登&nbsp;&nbsp;&nbsp;&nbsp;陆&nbsp;&nbsp;</button>
-                </form>
+                <button type="button" class="btn btn-info" onclick="login()">&nbsp;&nbsp;登&nbsp;&nbsp;&nbsp;&nbsp;陆&nbsp;&nbsp;</button>
+                
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->

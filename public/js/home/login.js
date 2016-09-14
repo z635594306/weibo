@@ -1,23 +1,22 @@
-var code_val = null
-
-var mytime = setInterval(function(){
+function login(){
+    var email = $('#email').val();
+    var pwd = $('#pwd').val();
+    var code = $('#code').val();
+    var token = $('#token').val();
     $.ajax({
-        url:"/reg/code",
-        dataType:"text",
-        type:"get",
+        url:"/login",
+        data:{'_token':token,'email':email,'pwd':pwd,'code':code},
+        dataType:"json",
+        type:"post",
         async:'true',
         success: function(data){
-                code_val = data;
+                if (data.error > 0) {
+                    alert(data.message);
+                    $('img[name=code]').click();
+                    return;
+                };
+                history.go(0);
+                return;
             }
     });
-},1000);
-
-function login(){
-    var input_val = $('input[name=code]').val();
-    if (input_val.toLowerCase() == code_val) {
-        return true;
-    }else{
-        alert('验证码错误');
-        return false;
-    };
 };
