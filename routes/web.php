@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    $weibos = db::table('weibo')->orderBy('comment', 'desc')->skip(0)->take(10)->get();
+    $weibos = DB::table('weibo')->orderBy('comment', 'desc')->skip(0)->take(10)->get();
     return view('home.index',['weibos' => $weibos]);
 });
 //生成验证码

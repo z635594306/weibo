@@ -20,22 +20,28 @@
             <!-- 中间内容开始 -->
             <div class="col-md-7" style="padding-left:0px;">
                 <ul>
-                    @foreach($weibos as $weibo)
+                    @foreach ($weibos as $weibo)
                         <li>
                             <div class=" col-md-12 weibo-content">
                                 <div class="row text-box">
-                                    <a href=""><span class="weibo-title"><b></b></span></a>
-                                    外国一小哥分享的一款特殊的.....套套..可以让你在黑暗中也能看清自己.....大家自己感受下...我看不懂
+                                    <a href=""><span class="weibo-title"><b>#你妈炸了#</b></span></a>
+                                    {{ $weibo->content }}
                                 </div>
                                 <div class="btn-box">
                                     <span class="person-info">
                                         <a href=""><img src="holder.js/18x18"></a>
                                         <a href=""><span>@薄荷包蛋派</span></a>
-                                        <span class="weibo-time">今天 12:03</span>
+                                        @if(date('Ynj') == date('Ynj',$weibo->time))
+                                            <span class="weibo-time">今天 {{ date('H:i',$weibo->time) }}</span>
+                                        @elseif(date('Y') == date('Y',$weibo->time))
+                                            <span class="weibo-time"> {{ date('n月j日 H:i',$weibo->time) }}</span>
+                                        @else
+                                            <span class="weibo-time"> {{ date('Y年n月j日',$weibo->time) }}</span>
+                                        @endif
                                     </span>
-                                    <a class="pull-right weibo-btn" href=""> <i class="fa fa-thumbs-o-up "> </i><span> 27370 </span></a>
-                                    <a class="pull-right weibo-btn" href=""> <i class="fa fa-comment-o"> </i><span> 27370 </span></a>
-                                    <a class="pull-right weibo-btn" href=""> <i class="fa fa-bookmark"> </i><span> 27370 </span></a>
+                                    <a class="pull-right weibo-btn" href=""> <i class="fa fa-thumbs-o-up "> </i><span> {{ $weibo->comment }} </span></a>
+                                    <a class="pull-right weibo-btn" href=""> <i class="fa fa-comment-o"> </i><span> {{ $weibo->keep }} </span></a>
+                                    <a class="pull-right weibo-btn" href=""> <i class="fa fa-bookmark"> </i><span> {{ $weibo->turn }} </span></a>
                                 </div>
                             </div>
                         </li>
