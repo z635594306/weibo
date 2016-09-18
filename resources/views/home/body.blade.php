@@ -20,31 +20,26 @@
             <!-- 中间内容开始 -->
             <div class="col-md-7" style="padding-left:0px;">
                 <ul>
-                    <li>
-                        <div class=" col-md-12 weibo-content">
-                            <div class="row text-box">
-                                <a href=""><span class="weibo-title"><b>外国小哥是傻逼</b></span></a>
-                                外国一小哥分享的一款特殊的.....套套..可以让你在黑暗中也能看清自己.....大家自己感受下...我看不懂
+                    @foreach($weibos as $weibo)
+                        <li>
+                            <div class=" col-md-12 weibo-content">
+                                <div class="row text-box">
+                                    <a href=""><span class="weibo-title"><b></b></span></a>
+                                    外国一小哥分享的一款特殊的.....套套..可以让你在黑暗中也能看清自己.....大家自己感受下...我看不懂
+                                </div>
+                                <div class="btn-box">
+                                    <span class="person-info">
+                                        <a href=""><img src="holder.js/18x18"></a>
+                                        <a href=""><span>@薄荷包蛋派</span></a>
+                                        <span class="weibo-time">今天 12:03</span>
+                                    </span>
+                                    <a class="pull-right weibo-btn" href=""> <i class="fa fa-thumbs-o-up "> </i><span> 27370 </span></a>
+                                    <a class="pull-right weibo-btn" href=""> <i class="fa fa-comment-o"> </i><span> 27370 </span></a>
+                                    <a class="pull-right weibo-btn" href=""> <i class="fa fa-bookmark"> </i><span> 27370 </span></a>
+                                </div>
                             </div>
-                            <div class="row img-box">
-                                <ul>
-                                    <li><a href=""><img src="holder.js/157x122"></a></li>
-                                    <li><a href=""><img src="holder.js/157x122"></a></li>
-                                    <li><a href=""><img src="holder.js/157x122"></a></li>
-                                </ul>
-                            </div>
-                            <div class="btn-box">
-                                <span class="person-info">
-                                    <a href=""><img src="holder.js/18x18"></a>
-                                    <a href=""><span>@薄荷包蛋派</span></a>
-                                    <span class="weibo-time">今天 12:03</span>
-                                </span>
-                                <a class="pull-right weibo-btn" href=""> <i class="fa fa-thumbs-o-up "> </i><span> 27370 </span></a>
-                                <a class="pull-right weibo-btn" href=""> <i class="fa fa-comment-o"> </i><span> 27370 </span></a>
-                                <a class="pull-right weibo-btn" href=""> <i class="fa fa-bookmark"> </i><span> 27370 </span></a>
-                            </div>
-                        </div>
-                    </li>
+                        </li>
+                    @endforeach
                 </ul>
             </div>
             <!-- 中间内容结束 -->

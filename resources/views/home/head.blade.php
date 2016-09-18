@@ -23,9 +23,13 @@
             <div class="col-md-4 col-md-offset-2 hidden-xs">
                 <ul id="top-nuv">
                     <li><a href="{{ URL('') }}"><span class="glyphicon glyphicon-home nuv-ico"> </span> 首页 </a></li>
-                    <li><span class="glyphicon glyphicon-gift nuv-ico"> </span> 发现 </li>
-                    <li><a href="{{ URL('/reg') }}">注册</a></li>
-                    <li><span id="login-btn" data-toggle="modal" data-target="#login">登陆</span></li>
+                    @if(session('userInfo'))
+                        <li><a href="">{{ session('userInfo')->nickname }}</a></li>
+                        <li><a href=""><span class="glyphicon glyphicon-th nuv-ico"> </span></a></li>
+                    @else
+                        <li><a href="{{ URL('/reg') }}" class="fa fa-spin">注册</a></li>
+                        <li><span id="login-btn" data-toggle="modal" data-target="#login">登陆</span></li>
+                    @endif
                 </ul>
             </div>
         </div>

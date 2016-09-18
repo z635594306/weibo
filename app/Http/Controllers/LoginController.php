@@ -58,8 +58,9 @@ class LoginController extends Controller
         //判断结束
 
         //写用户数据到session
+        $user_info = db::table('user_info')->where('login_id','=',$res->id)->first();
+        Session::set('userInfo',$user_info);
 
-        
         return $message['error'] = 0;
         
     }

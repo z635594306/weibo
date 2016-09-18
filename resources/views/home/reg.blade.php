@@ -71,14 +71,14 @@
                                 </div>
                                 <div class="form-group">
                                     <div class="col-sm-offset-3 col-sm-5">
-                                        <button type="button" onclick="reg()" class="btn btn-warning col-md-12"><span class="h4">立 即 注 册</span></button>
+                                        <button type="button" onclick="reg()" class="btn btn-warning col-md-12" id="reg-btn"><span class="h4">立 即 注 册</span></button>
                                     </div>
                                 </div>
                             </form>
                         </div>
                         <div class="col-md-3 hidden-xs" id="reg-box">
                             <div class="row">
-                                <div class="col-md-12" id="go-login"><p>已有账号<a href="{{ URL('') }}" class="text-red">直接登录 >>></a></p></div>
+                                <div class="col-md-12" id="go-login"><p>已有账号<a href="{{ URL('') }}" class="text-red" id="goLogin">直接登录 >>></a></p></div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12"><div id="xian"> </div></div>

@@ -64,15 +64,33 @@ function reg(){
         dataType:"json",
         type:"post",
         async:'true',
+        beforeSend: function () {
+            ShowDiv();
+        },
+        complete: function () {
+            HiddenDiv();
+        },
         success: function(data){
                 if (data.error > 0) {
                     alert(data.message);
                     $('img[name=code]').click();
                     return;
                 };
-                history.go(0);
+                alert(data.message);
+                window.location = '/';
                 return;
             }
     });
 };
 
+
+//显示加载数据
+function ShowDiv() {
+    $('#reg-btn').html('<span class="h4">正 在 提 交</span>');
+    $('#reg-btn').attr('disabled','true');
+}
+//隐藏加载数据
+function HiddenDiv() {
+    $('#reg-btn').html('<span class="h4">立 即 注 册</span>');
+    $('#reg-btn').removeAttr('disabled');
+}
