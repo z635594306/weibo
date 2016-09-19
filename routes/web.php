@@ -11,16 +11,13 @@
 |
 */
 
-Route::get('/', function () {
-    $weibos = DB::table('weibo')->orderBy('comment', 'desc')->skip(0)->take(10)->get();
-    return view('home.index',['weibos' => $weibos]);
-});
+    Route::get('/', 'IndexController@index');
 //生成验证码
     Route::get('/captcha/{tmp}', 'CaptchaController@captcha');
 
 //注册相关
     Route::get('/reg', 'RegController@index');
-    Route::post('/reg/doreg', 'RegController@doreg');
+    Route::post('/reg/doreg/{id}', 'RegController@doreg');
     //邮箱激活
     Route::get('/active/token={token}&id={id}','ActiveController@active');
 //注册相关

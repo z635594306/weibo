@@ -27,7 +27,7 @@
                         <li><a href="">{{ session('userInfo')->nickname }}</a></li>
                         <li><a href=""><span class="glyphicon glyphicon-th nuv-ico"> </span></a></li>
                     @else
-                        <li><a href="{{ URL('/reg') }}" class="fa fa-spin">注册</a></li>
+                        <li><a href="{{ URL('/reg') }}">注册</a></li>
                         <li><span id="login-btn" data-toggle="modal" data-target="#login">登陆</span></li>
                     @endif
                 </ul>
