@@ -73,4 +73,11 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
-
+<div id="tianqi-box">
+    <div id="tianqi-ico-box"><img src="" id="tianqi-ico"></div>
+    <div id="tianqi-info">
+        城市：<span id="tq-name"></span><br>
+        天气：<span id="tq-text"></span><br>
+        温度：<span id="tq-wd"></span> 
+    </div>
+</div>

@@ -4,7 +4,7 @@
             <!-- 左侧菜单开始 -->
             <div class="col-md-2 hidden-xs">
                 <ul id="index-nav">
-                    @if($weibos)
+                    @if(session('userInfo'))
                         <li><a href="">首页</a></li>
                         <li><a href="">我的收藏</a></li>
                         <li><a href="">我的赞</a></li>
@@ -28,15 +28,54 @@
             <!-- 中间内容开始 -->
             <div class="col-md-7" style="padding-left:0px;">
                 <ul>
+                    <!-- 展示发博框 -->
+                    @if(session('userInfo'))
                     <li>
                         <div class=" col-md-12 weibo-content">
                             <div class="row"><img src="{{ asset('imgs/weiboedit.jpg') }}"></div>
-                            <textarea id="weibo-edit"></textarea>
-                            <div class="row"><span>还可以输入<span>182</span>字</span><button class="btn btn-warning pull-right" style="width:80px;">发布</button></div>
+                            <textarea id="weibo-edit" name="weiboContent"></textarea>
+                            <div class="row">
+                                <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>" id="token">
+                                <span id="count-box">还可以输入 <span id="weibo-count">140</span> 字</span>
+                                <button class="btn btn-warning pull-right" style="width:80px;" id="published">发布</button>
+                            </div>
                         </div>
                     </li>
+                    <!-- 展示发博框 -->
+                    <!-- 遍历个人微博 -->
                     @foreach ($weibos as $weibo)
                         <li>
+                            <div class=" col-md-12 weibo-content">
+                                <div class="row">
+                                    <div class="weibo-face-box pull-left">
+                                        <a href=""><img src="{{ asset('imgs/face.jpg') }}" width="50px" height="50px"></a>
+                                    </div>
+                                    <div class="weibo-content-box pull-right">
+                                        <a href=""><b>{{ $weibo->nickname }}</b></a><br>
+                                        @if(date('Ynj') == date('Ynj',$weibo->time))
+                                            <span class="weibo-time">今天 {{ date('H:i',$weibo->time) }}</span>
+                                        @elseif(date('Y') == date('Y',$weibo->time))
+                                            <span class="weibo-time"> {{ date('n月j日 H:i',$weibo->time) }}</span>
+                                        @else
+                                            <span class="weibo-time"> {{ date('Y年n月j日',$weibo->time) }}</span>
+                                        @endif
+                                        <div>{{ $weibo->content }}</div>
+                                    </div>
+                                </div>
+                                <div class="row weibo-btn-box">
+                                    <div class=""><a href="">收藏</a></div>
+                                    <div class=""><a href="">转发</a></div>
+                                    <div class=""><a href="">评论</a></div>
+                                    <div class=""><a href="">点赞</a></div>
+                                </div>
+                            </div>
+                        </li>
+                    @endforeach
+                    <!-- 结束遍历 -->
+                    @else
+                    <!-- 遍历所有微博 -->
+                    @foreach ($weibos as $weibo)
+                         <li>
                             <div class=" col-md-12 weibo-content">
                                 <div class="row text-box">
                                     <a href=""><span class="weibo-title"><b>#你妈炸了#</b></span></a>
@@ -45,7 +84,7 @@
                                 <div class="btn-box">
                                     <span class="person-info">
                                         <a href=""><img src="{{ asset('imgs/face.jpg') }}" width="18px" height="18px"></a>
-                                        <a href=""><span>@薄荷包蛋派</span></a>
+                                        <a href=""><span>{{ '@'.$weibo->nickname }}</span></a>
                                         @if(date('Ynj') == date('Ynj',$weibo->time))
                                             <span class="weibo-time">今天 {{ date('H:i',$weibo->time) }}</span>
                                         @elseif(date('Y') == date('Y',$weibo->time))
@@ -61,6 +100,8 @@
                             </div>
                         </li>
                     @endforeach
+                    <!-- 结束遍历 -->
+                    @endif
                 </ul>
             </div>
             <!-- 中间内容结束 -->
