@@ -44,11 +44,11 @@
                     <!-- 展示发博框 -->
                     <!-- 遍历个人微博 -->
                     @foreach ($weibos as $weibo)
-                        <li>
+                        <li weibo="{{ $weibo->id }}">
                             <div class=" col-md-12 weibo-content">
                                 <div class="row">
                                     <div class="weibo-face-box pull-left">
-                                        <a href=""><img src="{{ asset('imgs/face.jpg') }}" width="50px" height="50px"></a>
+                                        <a href=""><img src="{{ asset('imgs/face.jpg') }}" class="weibo-face"></a>
                                     </div>
                                     <div class="weibo-content-box pull-right">
                                         <a href=""><b>{{ $weibo->nickname }}</b></a><br>
@@ -63,10 +63,26 @@
                                     </div>
                                 </div>
                                 <div class="row weibo-btn-box">
-                                    <div class=""><a href="">收藏</a></div>
-                                    <div class=""><a href="">转发</a></div>
-                                    <div class=""><a href="">评论</a></div>
-                                    <div class=""><a href="">点赞</a></div>
+                                    <div>转发</div>
+                                    <div>收藏</div>
+                                    <div onclick="comment({{ $weibo->id }},{{ session('userInfo')->id }})">评论</div>
+                                    <div>点赞</div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 weibo-comment-box wb-plk" id="pl-{{ $weibo->id }}" style="display:none;">
+                                <div class="row comment-edit-box">
+                                    <div class="col-md-1"><img src="{{ asset('imgs/face.jpg') }}" class="wb-comment-face"></div>
+                                    <div class="col-md-11"><textarea class="weibo-comment-edit" id="wb-cmt-edit-{{ $weibo->id }}"></textarea></div>
+                                    <div class="col-md-11 col-md-offset-1">
+                                        
+                                            @if($weibo->comment > 0)
+                                                <span style="color:#808080;font-size:12px;line-height:25px;">共有{{ $weibo->comment }}条评论</span>
+                                            @else
+                                                <span style="color:#808080;font-size:12px;line-height:25px;">还没有评论这条微博，快来第一个评论吧！</span>
+                                            @endif
+                                        
+                                        <button class="pull-right btn btn-danger btn-xs comment-btn" id="comment-btn-{{ $weibo->id }}" onclick="setComment({{ $weibo->id }}, {{ session('userInfo')->id }})">评论</button>
+                                    </div>
                                 </div>
                             </div>
                         </li>

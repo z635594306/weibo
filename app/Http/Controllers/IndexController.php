@@ -26,6 +26,7 @@ class IndexController extends Controller
 
             $weibos = DB::table('weibo')
                 ->where('user_id','=',session::get('userInfo')->id)
+                ->where('lock', 0)
                 ->join('user_info', function($join){
                     $join->on('weibo.user_id', '=', 'user_info.id');
                 })
@@ -41,6 +42,7 @@ class IndexController extends Controller
 
             //如果为空,遍历全部微博
             $weibos = DB::table('weibo')
+                ->where('lock', 0)
                 ->join('user_info', function($join){
                     $join->on('weibo.user_id', '=', 'user_info.id');
                 })

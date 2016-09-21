@@ -32,11 +32,7 @@
         return $json;
     });
 
-
-
-
-
-
-
-
+//获取微博评论
+    Route::post('/comment/get', 'CommentController@get');
+    Route::post('/comment/set', 'CommentController@set');
 
