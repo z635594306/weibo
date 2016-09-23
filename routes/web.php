@@ -12,7 +12,9 @@
 */
 //主页
     Route::get('/', 'IndexController@index');
+    Route::get('/page/{page?}', 'IndexController@index');
     Route::post('/published', 'WeiboController@published');
+    Route::post('/delweibo', 'WeiboController@delWeibo');
 //生成验证码
     Route::get('/captcha/{tmp}', 'CaptchaController@captcha');
 

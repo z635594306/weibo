@@ -11,7 +11,7 @@
                 <form class="form-horizontal col-md-12">
                   <div class="form-group" style="margin-bottom: 0px;">
                     <div class="input-group col-md-12" style="margin-top: 7px;">
-                        <input type="text" class="form-control" id="search" placeholder="大家都在搜：贱婊子马蓉">
+                        <input type="text" class="form-control" id="search" placeholder="大家都在搜：天凉别感冒">
                         <span class="input-group-btn">  
                             <button class="btn btn-default" id="test-button" type="button"><span class="glyphicon glyphicon-search"></span></button>  
                         </span>

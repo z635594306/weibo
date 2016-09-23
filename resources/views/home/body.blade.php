@@ -1,3 +1,8 @@
+@if(session('userInfo'))
+    <input type="hidden" id="LoginInfo" value="{{ session('userInfo')->id }}">
+@else
+    <input type="hidden" id="LoginInfo" value="0">
+@endif
 <div class="container-fluid" style="background:url(./imgs/body_bg.jpg) no-repeat;">
     <div class="col-md-8 col-md-offset-2" style="z-index:2;padding:5px;">
         <div class="row">
@@ -27,7 +32,7 @@
 
             <!-- 中间内容开始 -->
             <div class="col-md-7" style="padding-left:0px;">
-                <ul>
+                <ul id="weibo-list">
                     <!-- 展示发博框 -->
                     @if(session('userInfo'))
                     <li>
@@ -44,21 +49,19 @@
                     <!-- 展示发博框 -->
                     <!-- 遍历个人微博 -->
                     @foreach ($weibos as $weibo)
-                        <li weibo="{{ $weibo->id }}">
+                        <li id="weibo-{{ $weibo->id }}" onmousemove="showDel({{ $weibo->id }})" onmouseout="hideDel({{ $weibo->id }})">
                             <div class=" col-md-12 weibo-content">
                                 <div class="row">
                                     <div class="weibo-face-box pull-left">
                                         <a href=""><img src="{{ asset('imgs/face.jpg') }}" class="weibo-face"></a>
                                     </div>
                                     <div class="weibo-content-box pull-right">
-                                        <a href=""><b>{{ $weibo->nickname }}</b></a><br>
-                                        @if(date('Ynj') == date('Ynj',$weibo->time))
-                                            <span class="weibo-time">今天 {{ date('H:i',$weibo->time) }}</span>
-                                        @elseif(date('Y') == date('Y',$weibo->time))
-                                            <span class="weibo-time"> {{ date('n月j日 H:i',$weibo->time) }}</span>
-                                        @else
-                                            <span class="weibo-time"> {{ date('Y年n月j日',$weibo->time) }}</span>
+                                        <a href=""><b>{{ $weibo->nickname }}</b></a>
+                                        @if($weibo->user_id == session('userInfo')->id)
+                                            <button id="weibo-del-{{ $weibo->id }}" onclick="delWeibo({{ $weibo->id }})" class="hidden pull-right btn btn-danger btn-xs">删除</button>
                                         @endif
+                                        <br>
+                                        <span class="weibo-time"> {{ $weibo->time }}</span>
                                         <div>{{ $weibo->content }}</div>
                                     </div>
                                 </div>
@@ -94,20 +97,14 @@
                          <li>
                             <div class=" col-md-12 weibo-content">
                                 <div class="row text-box">
-                                    <a href=""><span class="weibo-title"><b>#你妈炸了#</b></span></a>
+                                    <!-- <a href=""><span class="weibo-title"><b>#你妈炸了#</b></span></a> -->
                                     {{ $weibo->content }}
                                 </div>
                                 <div class="btn-box">
                                     <span class="person-info">
                                         <a href=""><img src="{{ asset('imgs/face.jpg') }}" width="18px" height="18px"></a>
                                         <a href=""><span>{{ '@'.$weibo->nickname }}</span></a>
-                                        @if(date('Ynj') == date('Ynj',$weibo->time))
-                                            <span class="weibo-time">今天 {{ date('H:i',$weibo->time) }}</span>
-                                        @elseif(date('Y') == date('Y',$weibo->time))
-                                            <span class="weibo-time"> {{ date('n月j日 H:i',$weibo->time) }}</span>
-                                        @else
-                                            <span class="weibo-time"> {{ date('Y年n月j日',$weibo->time) }}</span>
-                                        @endif
+                                        <span class="weibo-time"> {{ $weibo->time }}</span>
                                     </span>
                                     <a class="pull-right weibo-btn" href=""> <i class="fa fa-thumbs-o-up"> </i><span> {{ $weibo->comment }} </span></a>
                                     <a class="pull-right weibo-btn" href=""> <i class="fa fa-comment-o"> </i><span> {{ $weibo->keep }} </span></a>

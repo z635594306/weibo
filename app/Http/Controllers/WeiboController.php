@@ -41,9 +41,46 @@ class WeiboController extends Controller
 
         //返回状态
         if ($id > 0) {
-            return array('error' => 0, 'message' => '发表微博成功');
+            $weibo = DB::table('weibo')
+                ->where('id', $id)
+                ->skip(0)->take(1)
+                ->get();
+
+            $userInfo = DB::table('user_info')
+                ->where('id', session::get('userInfo')->id)
+                ->skip(0)->take(1)
+                ->get();
+
+            //处理时间
+
+                $time = $weibo[0]->time;
+                if (date('Yjn') == date('Yjn',$time)) {
+                    $weibo[0]->time = ' 今天 '.date(' H:i ', $weibo[0]->time);
+                }elseif(date('Y') == date('Y',$weibo[0]->time)){
+                    $weibo[0]->time = date(' n月j日 H:i ', $weibo[0]->time);
+                }else{
+                    $weibo[0]->time = date(' Y年n月j日 ', $weibo[0]->time);
+                }
+
+            return array('error' => 0, 'message' => '发表微博成功', $weibo[0], $userInfo[0]);
         }else{
             return array('error' => 2, 'message' => '发表微博失败');
         }
+    }
+
+
+    public function delWeibo(Request $request)
+    {
+        $id = $request->input('weibo_id');
+
+        DB::table('weibo_comment')->where('weibo_id', $id)->delete();
+        $src = DB::table('weibo')->where('id', $id)->delete();
+
+        if ($src) {
+            
+            DB::table('user_info')->where('id', session::get('userInfo')->id)->decrement('weibo');
+        }
+        sleep(1);
+        return $src;
     }
 }

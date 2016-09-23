@@ -18,7 +18,7 @@ class IndexController extends Controller
     *   return   返回微博信息
     *
     */
-    public function index()
+    public function index($page=0)
     {
         //判断用户session是否为空,不为空显示用户及粉丝微博
         $userInfo = session::get('userInfo');
@@ -33,10 +33,25 @@ class IndexController extends Controller
                 ->select('weibo.*', 'user_info.nickname')
                 ->orderBy('time', 'desc')
                 ->orderBy('comment', 'desc')
-                ->skip(0)->take(10)
-                ->get();
+                ->simplePaginate(10);
 
-            return view('home.index',['weibos' => $weibos]);
+                //处理时间
+                foreach ($weibos as $k => $v) {
+                    $time = $weibos[$k]->time;
+                    if (date('Yjn') == date('Yjn',$time)) {
+                        $weibos[$k]->time = ' 今天 '.date(' H:i ', $weibos[$k]->time);
+                    }elseif(date('Y') == date('Y',$weibos[$k]->time)){
+                        $weibos[$k]->time = date(' n月j日 H:i ', $weibos[$k]->time);
+                    }else{
+                        $weibos[$k]->time = date(' Y年n月j日 ', $weibos[$k]->time);
+                    }
+                }
+
+            if (!$page) {
+                return view('home.index',['weibos' => $weibos]);
+            }else{
+                return $weibos;
+            }
 
         }else{
 
@@ -48,10 +63,25 @@ class IndexController extends Controller
                 })
                 ->select('weibo.*', 'user_info.nickname')
                 ->orderBy('time', 'desc')
-                ->skip(0)->take(10)
-                ->get();
+                ->simplePaginate(10);
 
-            return view('home.index',['weibos' => $weibos]);
+                //处理时间
+                foreach ($weibos as $k => $v) {
+                    $time = $weibos[$k]->time;
+                    if (date('Yjn') == date('Yjn',$time)) {
+                        $weibos[$k]->time = ' 今天 '.date(' H:i ', $weibos[$k]->time);
+                    }elseif(date('Y') == date('Y',$weibos[$k]->time)){
+                        $weibos[$k]->time = date(' n月j日 H:i ', $weibos[$k]->time);
+                    }else{
+                        $weibos[$k]->time = date(' Y年n月j日 ', $weibos[$k]->time);
+                    }
+                }
+
+            if (!$page) {
+                return view('home.index',['weibos' => $weibos]);
+            }else{
+                return $weibos;
+            }
         }
         
     }
