@@ -1,0 +1,45 @@
+#face100{
+	/*position:relative;*/
+	margin: 50px auto;
+}
+#nickname{
+	text-align: center;
+}
+#intro{
+	text-align: center;
+}
+#table{
+	width: 100%;
+	text-align: center;
+	line-height: 40px;
+}
+#table_fans{
+	width: 100%;
+	text-align: center;
+	height:50px;
+}
+#table_fans a{
+	display: inline-block;
+	width: 100%;
+	margin: 8px 0px;
+}
+#table_fans strong{
+	display: block;
+	height: 18px;
+	width: 85px;
+	line-height: 18px;
+	font-size: 150%;
+	/*font-weight: bold;*/
+}
+#table_fans span{
+	display: block;
+	height: 18px;
+	width: 85px;
+	line-height: 18px;
+}
+
+#th-2{
+	border:0 none;
+	border-left:1px solid #C0C0C0;
+	border-right:1px solid #C0C0C0;
+}

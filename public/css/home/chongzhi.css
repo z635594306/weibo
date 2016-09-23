@@ -1,0 +1,8 @@
+#vip_bg{
+	width: 100%;
+	height: 170px;
+	background:url(../../imgs/weibo_vipbg.png) no-repeat -180px 0px ;
+}
+#vip_main{
+	background:url(../../imgs/vip_main.png) 0px 0px;
+}
