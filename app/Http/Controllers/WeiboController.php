@@ -72,7 +72,8 @@ class WeiboController extends Controller
     public function delWeibo(Request $request)
     {
         $id = $request->input('weibo_id');
-
+        DB::table('praise')->where(['weibo_id'=>$id, 'user_id'=>session::get('userInfo')->id])->delete();
+        DB::table('keep')->where(['weibo_id'=>$id, 'user_id'=>session::get('userInfo')->id])->delete();
         DB::table('weibo_comment')->where('weibo_id', $id)->delete();
         $src = DB::table('weibo')->where('id', $id)->delete();
 

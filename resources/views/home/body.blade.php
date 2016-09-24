@@ -10,21 +10,21 @@
             <div class="col-md-2 hidden-xs">
                 <ul id="index-nav">
                     @if(session('userInfo'))
-                        <li><a href="">首页</a></li>
-                        <li><a href="">我的收藏</a></li>
-                        <li><a href="">我的赞</a></li>
-                        <li><a href="">我的关注</a></li>
-                        <li><a href="">我的粉丝</a></li>
+                        <li onclick="f5()">首页</li>
+                        <li onclick="lookKeep()">我的收藏</li>
+                        <li onclick="lookPraise()">我的赞</li>
+                        <li>我的关注</li>
+                        <li>我的粉丝</li>
                     @else
-                        <li><a href=""><span class="glyphicon glyphicon-heart"> </span>&nbsp;&nbsp; 推荐 </a></li>
-                        <li><a href=""><span class="glyphicon glyphicon-user"> </span>&nbsp;&nbsp;  明星 </a></li>
-                        <li><a href=""><span class="glyphicon glyphicon-star-empty"> </span>&nbsp;&nbsp;  搞笑 </a></li>
-                        <li><a href=""><span class="glyphicon glyphicon-heart-empty"> </span>&nbsp;&nbsp;  情感 </a></li>
-                        <li><a href=""><span class="glyphicon glyphicon-send"> </span>&nbsp;&nbsp;  社会 </a></li>
-                        <li><a href=""><span class="glyphicon glyphicon-sunglasses"> </span>&nbsp;&nbsp;  综艺 </a></li>
-                        <li><a href=""><span class="glyphicon glyphicon-cutlery"> </span>&nbsp;&nbsp;  美食 </a></li>
-                        <li><a href=""><span class="glyphicon glyphicon-gift"> </span>&nbsp;&nbsp;  美女 </a></li>
-                        <li><a href=""><span class="glyphicon glyphicon-equalizer"> </span>&nbsp;&nbsp;  更多 </a></li>
+                        <li><span class="glyphicon glyphicon-heart"> </span>&nbsp;&nbsp; 推荐 </li>
+                        <li><span class="glyphicon glyphicon-user"> </span>&nbsp;&nbsp;  明星 </li>
+                        <li><span class="glyphicon glyphicon-star-empty"> </span>&nbsp;&nbsp;  搞笑 </li>
+                        <li><span class="glyphicon glyphicon-heart-empty"> </span>&nbsp;&nbsp;  情感 </li>
+                        <li><span class="glyphicon glyphicon-send"> </span>&nbsp;&nbsp;  社会 </li>
+                        <li><span class="glyphicon glyphicon-sunglasses"> </span>&nbsp;&nbsp;  综艺 </li>
+                        <li><span class="glyphicon glyphicon-cutlery"> </span>&nbsp;&nbsp;  美食 </li>
+                        <li><span class="glyphicon glyphicon-gift"> </span>&nbsp;&nbsp;  美女 </li>
+                        <li><span class="glyphicon glyphicon-equalizer"> </span>&nbsp;&nbsp;  更多 </li>
                     @endif
                 </ul>
             </div>
@@ -66,10 +66,9 @@
                                     </div>
                                 </div>
                                 <div class="row weibo-btn-box">
-                                    <div>转发</div>
-                                    <div>收藏</div>
-                                    <div onclick="comment({{ $weibo->id }},{{ session('userInfo')->id }})">评论</div>
-                                    <div>点赞</div>
+                                    <div id="keep-btn-{{ $weibo->id }}" onclick="keep({{ $weibo->id }},{{ session('userInfo')->id }})">收藏 <span>{{ $weibo->keep }}</span></div>
+                                    <div id="comment-btn-{{ $weibo->id }}" onclick="comment({{ $weibo->id }},{{ session('userInfo')->id }})">评论 <span>{{ $weibo->comment }}</span></div>
+                                    <div id="praise-btn-{{ $weibo->id }}" onclick="praise({{ $weibo->id }},{{ session('userInfo')->id }})">赞 <span>{{ $weibo->praise }}</span></div>
                                 </div>
                             </div>
                             <div class="col-md-12 weibo-comment-box wb-plk" id="pl-{{ $weibo->id }}" style="display:none;">
@@ -106,9 +105,9 @@
                                         <a href=""><span>{{ '@'.$weibo->nickname }}</span></a>
                                         <span class="weibo-time"> {{ $weibo->time }}</span>
                                     </span>
-                                    <a class="pull-right weibo-btn" href=""> <i class="fa fa-thumbs-o-up"> </i><span> {{ $weibo->comment }} </span></a>
-                                    <a class="pull-right weibo-btn" href=""> <i class="fa fa-comment-o"> </i><span> {{ $weibo->keep }} </span></a>
-                                    <a class="pull-right weibo-btn" href=""> <i class="fa fa-bookmark"> </i><span> {{ $weibo->turn }} </span></a>
+                                    <a class="pull-right weibo-btn" href=""> <i class="fa fa-thumbs-o-up"> </i><span> {{ $weibo->praise }} </span></a>
+                                    <a class="pull-right weibo-btn" href=""> <i class="fa fa-comment-o"> </i><span> {{ $weibo->comment }} </span></a>
+                                    <a class="pull-right weibo-btn" href=""> <i class="fa fa-bookmark"> </i><span> {{ $weibo->keep }} </span></a>
                                 </div>
                             </div>
                         </li>
@@ -123,11 +122,8 @@
             <div class="col-md-3 hidden-xs" id="hot-box">
                 <!-- 热门话题开始 -->
                 <div class="row">
-                    <div class="col-md-12" id="hot-talk-btn">
-                        <b>热门话题</b><a href="" class="pull-right hv-orange"><i class="fa fa-refresh fa-spin"></i> </span> 换一换 </a>
-                    </div>
                     <div class="col-md-12" id="hot-talk-list">
-                        <ul id="talk-list">
+<!--                         <ul id="talk-list">
                             <li><a href="">#王宝强离婚#</a> <span class="pull-right">300万</span></li>
                             <li><a href="">#王宝强离婚#</a> <span class="pull-right">300万</span></li>
                             <li><a href="">#王宝强离婚#</a> <span class="pull-right">300万</span></li>
@@ -137,7 +133,7 @@
                             <li><a href="">#王宝强离婚#</a> <span class="pull-right">300万</span></li>
                             <li><a href="">#王宝强离婚#</a> <span class="pull-right">300万</span></li>
                             <li><a href="">#王宝强离婚#</a> <span class="pull-right">300万</span></li>
-                        </ul>
+                        </ul> -->
                     </div>
                     <div class="col-md-12" id="hot-talk-more">
                         <a href="" class="hv-orange">查看更多 ></a>

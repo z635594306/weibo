@@ -34,7 +34,7 @@
                 </div>
                 <div class="col-md-12 info-div">
                     <b>个人资料</b>
-                    <form class="form-horizontal" action="/centerset/update/2" method="post">
+                    <form class="form-horizontal" action="/centerset/update" method="post">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <div class="form-group">
                             <label for="inputEmail3" class="col-sm-2 control-label">昵称</label>
@@ -81,11 +81,11 @@
                     <div class="col-md-10">
                         <img src="holder.js/100x100" alt="当前头像">
                     </div>
-                    <form class="col-sm-10" action="#" method="" style="margin-bottom: 10px;">
+                    <form class="col-sm-10" action="/centerset/face" method="post" style="margin-bottom: 10px;">
                         <div class="form-group">
                             <label for="exampleInputFile">选择方式</label>
-                            <input type="file" id="exampleInputFile">
-                            <p class="help-block">寻找帮助</p>
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                            <input type="file" id="face" name="face">
                         </div>
                         <button type="submit" class="btn btn-default">保存</button>
                     </form>    

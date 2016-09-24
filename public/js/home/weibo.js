@@ -1,5 +1,6 @@
 var token = $('#token').val();
 var UserInfoId = $('#LoginInfo').val();
+
 /*-------------------------------微博类------------------------------------*/
 
 
@@ -42,10 +43,9 @@ $('#published').click(function(){
                 str += '<span class="weibo-time"> '+data[0].time+'</span>';
                 str += '<div>'+data[0].content+'</div>';
                 str += '</div></div><div class="row weibo-btn-box">';
-                str += '<div>转发</div>';
-                str += '<div>收藏</div>';
+                str += '<div id="keep-btn-'+data[0].id+'" onclick="keep('+data[0].id+','+UserInfoId+')">收藏</div>';
                 str += '<div onclick="comment('+data[0].id+','+UserInfoId+')">评论</div>';
-                str += '<div>点赞</div></div></div>';
+                str += '<div id="praise-btn-'+data[0].id+'" onclick="praise('+data[0].id+','+UserInfoId+')">赞 <span>'+data[0].praise+'</span></div></div></div>';
                 str += '<div class="col-md-12 weibo-comment-box wb-plk" id="pl-'+data[0].id+'" style="display:none;">';
                 str += '<div class="row comment-edit-box">';
                 str += '<div class="col-md-1"><img src="imgs/face.jpg" class="wb-comment-face"></div>';
@@ -115,9 +115,9 @@ function getWeiboNoLogin(){
                     str += '<a href=""><span>@'+data.data[i].nickname+'</span></a>';
                     str += '<span class="weibo-time">'+data.data[i].time+'</span>';
                     str += '</span>';
-                    str += '<a class="pull-right weibo-btn" href=""> <i class="fa fa-thumbs-o-up"> </i><span> '+data.data[i].keep+' </span></a>';
+                    str += '<a class="pull-right weibo-btn" href=""> <i class="fa fa-thumbs-o-up"> </i><span> '+data.data[i].praise+' </span></a>';
                     str += '<a class="pull-right weibo-btn" href=""> <i class="fa fa-comment-o"> </i><span> '+data.data[i].comment+' </span></a>';
-                    str += '<a class="pull-right weibo-btn" href=""> <i class="fa fa-bookmark"> </i><span> '+data.data[i].turn+' </span></a>';
+                    str += '<a class="pull-right weibo-btn" href=""> <i class="fa fa-bookmark"> </i><span> '+data.data[i].keep+' </span></a>';
                     str += '</div>';
                     str += '</div>';
                     str += '</li>';
@@ -154,10 +154,9 @@ function getWeiboLogin(){
                     str += '<span class="weibo-time"> '+data.data[i].time+'</span>';
                     str += '<div>'+data.data[i].content+'</div>';
                     str += '</div></div><div class="row weibo-btn-box">';
-                    str += '<div>转发</div>';
-                    str += '<div>收藏</div>';
+                    str += '<div id="praise-btn-'+data.data[i].id+'" onclick="keep('+data.data[i].id+','+UserInfoId+')">收藏</div>';
                     str += '<div onclick="comment('+data.data[i].id+','+UserInfoId+')">评论</div>';
-                    str += '<div>点赞</div></div></div>';
+                    str += '<div id="praise-btn-'+data.data[i].id+'" onclick="praise('+data.data[i].id+','+UserInfoId+')">赞 <span>'+data.data[i].praise+'</span></div></div></div>';
                     str += '<div class="col-md-12 weibo-comment-box wb-plk" id="pl-'+data.data[i].id+'" style="display:none;">';
                     str += '<div class="row comment-edit-box">';
                     str += '<div class="col-md-1"><img src="imgs/face.jpg" class="wb-comment-face"></div>';
@@ -261,7 +260,6 @@ function getComment(wbId){
                         str += '<span class="comment-content">'+data[i].content+'</span>';
                         str += '<br>';
                         str += '<span class="time">'+unix_to_datetime(data[i].time)+'</span>';
-                        str += '<span class="wb-cmt-ctt-btn pull-right"><button class="btn btn-info btn-xs">赞</button></span>';
                     str += '</div>';
                 str += '</div>';
             };
@@ -306,7 +304,7 @@ function setComment(wbId, user_id){
                         str += '<span class="comment-content">'+data[0].content+'</span>';
                         str += '<br>';
                         str += '<span class="time">'+unix_to_datetime(data[0].time)+'</span>';
-                        str += '<span class="wb-cmt-ctt-btn pull-right"><button class="btn btn-info btn-xs">赞</button></span>';
+                        // str += '<span class="wb-cmt-ctt-btn pull-right"><button class="btn btn-info btn-xs">赞</button></span>';
                     str += '</div>';
                 str += '</div>';
                 $('#pl-list-' + wbId).prepend(str);
@@ -328,3 +326,198 @@ function unix_to_datetime(unix) {
     return now.toLocaleString().replace(/\//, "年").replace(/\//, "月").replace(/\ /, "日 ");
 }
 /*-------------------------------JS处理时间戳*/
+
+/*-------------------------------点赞类------------------------------------*/
+
+/*-------------------------------点赞处理*/
+function praise(weibo_id,user_id){
+    $.ajax({
+        url:'/praise/add',
+        data:{'_token':token,'weibo_id':weibo_id,'user_id':user_id},
+        type:'post',
+        dataType:'json',
+        success:function(data){
+            if (data > 0) {
+                var count = parseInt($('#praise-btn-'+weibo_id).find('span').html())+1;
+                $('#praise-btn-'+weibo_id).html(' 已赞 <span> '+count+' </spam>')
+            }else{
+                alert('这条微博您已经赞过了!');
+            };
+        }
+    });
+}
+
+function delPraise(weibo_id,user_id){
+    $.ajax({
+        url:'/praise/del',
+        data:{'_token':token,'weibo_id':weibo_id,'user_id':user_id},
+        type:'post',
+        dataType:'json',
+        success:function(data){
+            if (data > 0) {
+                $('#weibo-'+weibo_id).fadeOut("slow");
+            }else{
+                alert('失败');
+            };
+        }
+    });
+}
+/*-------------------------------点赞处理*/
+
+/*-------------------------------点赞查看*/
+function lookPraise(){
+    get_weibo = false;
+    $('#weibo-list').empty();
+    $.ajax({
+        url:'/praise',
+        type:'post',
+        data:{'_token':token},
+        dataType:'json',
+        success:function(data){
+            $('#weibo-list').empty();
+            var str = '';
+            if (data.length > 0) {
+                for (var i = 0; i <= data.length-1; i++) {
+                    str += '<li id="weibo-'+data[i].id+'" onmousemove="showDel('+data[i].id+')" onmouseout="hideDel('+data[i].id+')">';
+                    str += '<div class=" col-md-12 weibo-content">';
+                    str += '<div class="row"><div class="weibo-face-box pull-left">';
+                    str += '<a href=""><img src="./imgs/face.jpg" class="weibo-face"></a></div>';
+                    str += '<div class="weibo-content-box pull-right">';
+                    str += '<a href=""><b>'+data[i].nickname+'</b></a>'
+                    if (data[i].uid == UserInfoId) {
+                        str += '<button id="weibo-del-'+data[i].id+'" onclick="delWeibo('+data[i].id+')" class="hidden pull-right weibo-del-btn btn btn-danger btn-xs" style="display:none">删除</button>';
+                    };
+                    str += '<br>';
+                    str += '<span class="weibo-time"> '+data[i].time+'</span>';
+                    str += '<div>'+data[i].content+'</div>';
+                    str += '</div></div><div class="row weibo-btn-box">';
+                    str += '<div id="keep-btn-'+data[i].id+'" onclick="keep('+data[i].id+','+UserInfoId+')">收藏</div>';
+                    str += '<div onclick="comment('+data[i].id+','+UserInfoId+')">评论</div>';
+                    str += '<div id="praise-btn-'+data[i].id+'" onclick="delPraise('+data[i].id+','+UserInfoId+')"> 已赞 <span>'+data[i].praise+'</span></div></div></div>';
+                    str += '<div class="col-md-12 weibo-comment-box wb-plk" id="pl-'+data[i].id+'" style="display:none;">';
+                    str += '<div class="row comment-edit-box">';
+                    str += '<div class="col-md-1"><img src="imgs/face.jpg" class="wb-comment-face"></div>';
+                    str += '<div class="col-md-11"><textarea class="weibo-comment-edit" id="wb-cmt-edit-'+data[i].id+'"></textarea></div>';
+                    str += '<div class="col-md-11 col-md-offset-1">'
+                    if (data[i].comment > 0) {
+                        str += '<span style="color:#808080;font-size:12px;line-height:25px;">共有 '+data[i].comment+' 条评论</span>';
+                    }else{
+                        str += '<span style="color:#808080;font-size:12px;line-height:25px;">还没有评论这条微博，快来第一个评论吧！</span>';
+                    };
+                    str += '<button class="pull-right btn btn-danger btn-xs comment-btn" id="comment-btn-'+data[i].id+'" onclick="setComment('+data[i].id+', '+UserInfoId+')">评论</button>';
+                    str += '</div></div></div></li>';
+                };
+            }else{
+                str += '<li>';
+                str += '<div class=" col-md-12 weibo-content">';
+                str += '您 还 没 有 点 过 赞 唉 ~ 快 去 点 赞 吧 ! ';
+                str += '</div>';
+                str += '</li>';
+            };
+            $('#weibo-list').append(str);
+        }
+    });
+}
+/*-------------------------------点赞查看*/
+
+/*-------------------------------点赞类------------------------------------*/
+
+
+
+
+
+
+
+
+
+/*-------------------------------收藏类------------------------------------*/
+
+function keep(weibo_id,user_id){
+    $.ajax({
+        url:'/keep/add',
+        data:{'_token':token,'weibo_id':weibo_id,'user_id':user_id},
+        type:'post',
+        dataType:'json',
+        success:function(data){
+            if (data > 0) {
+                $('#keep-btn-'+weibo_id).html(' 已收藏 ')
+            }else{
+                alert('这条微博您已经收藏过了，请前往您的收藏查看！');
+            };
+        }
+    });
+}
+
+
+function delKeep(weibo_id,user_id){
+    $.ajax({
+        url:'/keep/del',
+        data:{'_token':token,'weibo_id':weibo_id,'user_id':user_id},
+        type:'post',
+        dataType:'json',
+        success:function(data){
+            if (data > 0) {
+                $('#weibo-'+weibo_id).fadeOut("slow");
+            }else{
+                alert('失败');
+            };
+        }
+    });
+}
+
+
+
+function lookKeep(){
+    get_weibo = false;
+    $('#weibo-list').empty();
+    $.ajax({
+        url:'/keep',
+        type:'post',
+        data:{'_token':token},
+        dataType:'json',
+        success:function(data){
+            $('#weibo-list').empty();
+            var str = '';
+            if (data.length > 0) {
+                for (var i = 0; i <= data.length-1; i++) {
+                    str += '<li id="weibo-'+data[i].id+'" onmousemove="showDel('+data[i].id+')" onmouseout="hideDel('+data[i].id+')">';
+                    str += '<div class=" col-md-12 weibo-content">';
+                    str += '<div class="row"><div class="weibo-face-box pull-left">';
+                    str += '<a href=""><img src="./imgs/face.jpg" class="weibo-face"></a></div>';
+                    str += '<div class="weibo-content-box pull-right">';
+                    str += '<a href=""><b>'+data[i].nickname+'</b></a>'
+                    if (data[i].uid == UserInfoId) {
+                        str += '<button id="weibo-del-'+data[i].id+'" onclick="delWeibo('+data[i].id+')" class="hidden pull-right weibo-del-btn btn btn-danger btn-xs" style="display:none">删除</button>';
+                    };
+                    str += '<br>';
+                    str += '<span class="weibo-time"> '+data[i].time+'</span>';
+                    str += '<div>'+data[i].content+'</div>';
+                    str += '</div></div><div class="row weibo-btn-box">';
+                    str += '<div onclick="delKeep('+data[i].id+','+UserInfoId+')">已收藏</div>';
+                    str += '<div onclick="comment('+data[i].id+','+UserInfoId+')">评论</div>';
+                    str += '<div id="praise-btn-'+data[i].id+'" onclick="praise('+data[i].id+','+UserInfoId+')"> 赞 <span>'+data[i].praise+'</span></div></div></div>';
+                    str += '<div class="col-md-12 weibo-comment-box wb-plk" id="pl-'+data[i].id+'" style="display:none;">';
+                    str += '<div class="row comment-edit-box">';
+                    str += '<div class="col-md-1"><img src="imgs/face.jpg" class="wb-comment-face"></div>';
+                    str += '<div class="col-md-11"><textarea class="weibo-comment-edit" id="wb-cmt-edit-'+data[i].id+'"></textarea></div>';
+                    str += '<div class="col-md-11 col-md-offset-1">'
+                    if (data[i].comment > 0) {
+                        str += '<span style="color:#808080;font-size:12px;line-height:25px;">共有 '+data[i].comment+' 条评论</span>';
+                    }else{
+                        str += '<span style="color:#808080;font-size:12px;line-height:25px;">还没有评论这条微博，快来第一个评论吧！</span>';
+                    };
+                    str += '<button class="pull-right btn btn-danger btn-xs comment-btn" id="comment-btn-'+data[i].id+'" onclick="setComment('+data[i].id+', '+UserInfoId+')">评论</button>';
+                    str += '</div></div></div></li>';
+                };
+            }else{
+                str += '<li>';
+                str += '<div class=" col-md-12 weibo-content">';
+                str += ' 您 还 没 有 收 藏 过 微 博 ';
+                str += '</div>';
+                str += '</li>';
+            };
+            $('#weibo-list').append(str);
+        }
+    });
+}
+/*-------------------------------收藏类------------------------------------*/

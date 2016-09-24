@@ -2,6 +2,11 @@ $(function(){
     $('img[name=code]').click();
 });
 
+
+function f5(){
+    window.location ='/';
+}
+
 /*-------------------------------登陆处理------------------------------------*/
 function login(){
     var email = $('#email').val();
@@ -20,7 +25,7 @@ function login(){
                     $('img[name=code]').click();
                     return;
                 };
-                history.go(0);
+                f5();
                 return;
             }
     });

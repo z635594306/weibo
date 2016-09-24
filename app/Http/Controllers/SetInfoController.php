@@ -22,8 +22,9 @@ class SetInfoController extends Controller
             return view("home.centerset", ['vo'=>$data]);
         }
 
-        public function update($id, REQUEST $request)
+        public function update(Request $request)
         {
+            $id = session::get('userInfo')->id;
             /* 将 账户设置-个人信息 放到数据库 */
             // 获得表单数据
             $data = $request->only('nickname', 'sex', 'age', 'intro');
@@ -34,7 +35,7 @@ class SetInfoController extends Controller
             $info = DB::table('user_info')->where('id', $id)->update($data);
             if ($info > 0) {
                 // return "修改成功";
-                return redirect()->action('Home\CenterController@index');
+                return redirect()->action('SetInfoController@index');
             }else{
                 return "修改失败";
                 // return redirect()->action('Home/CenterController@update');
@@ -75,4 +76,9 @@ class SetInfoController extends Controller
                 return "修改失败";
             }
         }
+
+    public function face()
+    {
+        return 123;
+    }
 }

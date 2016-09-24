@@ -27,16 +27,39 @@
 
 //登陆
     Route::post('/login', 'LoginController@login');
+
+//获取微博评论
+    Route::post('/comment/get', 'CommentController@get');
+    Route::post('/comment/set', 'CommentController@set');
+
+//微博点赞
+    Route::post('/praise/add', 'PraiseController@AddPraise');
+    Route::post('/praise/del', 'PraiseController@DelPraise');
+    Route::post('/praise', 'PraiseController@show');
+//微博收藏
+    Route::post('/keep/add', 'KeepController@Addkeep');
+    Route::post('/keep/del', 'KeepController@Delkeep');
+    Route::post('/keep', 'KeepController@show');
+
+
+
+/*-----------------------------小模块------------------------------------------*/
 //天气
     Route::get('/tianqi', function(){
         $json = file_get_contents('https://api.thinkpage.cn/v3/weather/now.json?key=yjfwsn87ggfmojel&location=ip&language=zh-Hans&unit=c');
 
         return $json;
     });
+//左右广告
+    Route::get('/guanggao', function(){
+        $data = DB::table('advertising')
+            ->where('lock', 0)
+            ->inRandomOrder()
+            ->take(2)
+            ->get();
 
-//获取微博评论
-    Route::post('/comment/get', 'CommentController@get');
-    Route::post('/comment/set', 'CommentController@set');
+        return $data;
+    });
 
 
 /*----------------------------------------------------------------------------------*/
@@ -45,10 +68,11 @@
     Route::get('/centerset', 'SetInfoController@index');
 
     // 修改个人账户信息
-    Route::post("/centerset/update/", 'SetInfoController@update');
+    Route::post("/centerset/update", 'SetInfoController@update');
+    Route::post("/centerset/face", 'SetInfoController@face');
 
     //密码
-    Route::post('/centerset/pwd/', 'SetInfoController@pwdupdate');
+    Route::post('/centerset/pwd', 'SetInfoController@pwdupdate');
 
     /* 个人主页 */
     Route::get('/center', 'ZoneController@index');
