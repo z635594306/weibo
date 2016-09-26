@@ -68,7 +68,7 @@ class WeiboController extends Controller
         }
     }
 
-
+    //删除微博
     public function delWeibo(Request $request)
     {
         $id = $request->input('weibo_id');
@@ -84,4 +84,5 @@ class WeiboController extends Controller
         sleep(1);
         return $src;
     }
+
 }

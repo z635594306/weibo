@@ -10,6 +10,7 @@
 | to using a Closure or controller method. Build something great!
 |
 */
+
 //主页
     Route::get('/', 'IndexController@index');
     Route::get('/page/{page?}', 'IndexController@index');
@@ -31,7 +32,6 @@
 //获取微博评论
     Route::post('/comment/get', 'CommentController@get');
     Route::post('/comment/set', 'CommentController@set');
-
 //微博点赞
     Route::post('/praise/add', 'PraiseController@AddPraise');
     Route::post('/praise/del', 'PraiseController@DelPraise');
@@ -40,12 +40,16 @@
     Route::post('/keep/add', 'KeepController@Addkeep');
     Route::post('/keep/del', 'KeepController@Delkeep');
     Route::post('/keep', 'KeepController@show');
+//搜索微博
+    Route::get('/find', 'IndexController@findWeibo');
 
 //关注与粉丝
     Route::post('/follow/add', 'FansController@AddFollow');
     Route::post('/follow/del', 'FansController@DelFollow');
     Route::post('/follow/look', 'FansController@LookFollow');
     Route::post('/fans/look', 'FansController@LookFans');
+
+
 
 
 /*-----------------------------小模块------------------------------------------*/
@@ -102,32 +106,32 @@
     //2 需要登录才能访问的页面 执行退出 \后台首页\后台学生页面
     Route::group(['prefix'=>'admins', 'middleware"=>"myauth'],function(){
 
-        // 后台退出
-        Route::get("/logout","Admins\LoginController@logout");
+    // 后台退出
+    Route::get("/logout","Admins\LoginController@logout");
 
-        // 后台首页
-        Route::get("/index","Admins\IndexController@index");
+    // 后台首页
+    Route::get("/index","Admins\IndexController@index");
 
-        // 微博管理
-        Route::get("/message","Admins\WeiboController@index");
+    // 微博管理
+    Route::get("/message","Admins\WeiboController@index");
 
-        // 微博删除
-        Route::get("/message/del/{id}","Admins\WeiboController@doDel");
+    // 微博删除
+    Route::get("/message/del/{id}","Admins\WeiboController@doDel");
 
-        // 微博封印 解封
-        Route::get("/message/edit/{id}/{lock}","Admins\WeiboController@edit");
+    // 微博封印 解封
+    Route::get("/message/edit/{id}/{lock}","Admins\WeiboController@edit");
 
-        // 显示详情
-        Route::get("/message/{id}","Admins\WeiboController@show");
+    // 显示详情
+    Route::get("/message/{id}","Admins\WeiboController@show");
 
-        //用户权限
-        Route::get("/powers","Admins\PowersController@powers");
-        
-        //修改权限
-        Route::get("/powers/{id}/{lock}","Admins\PowersController@update");
+    //用户权限
+    Route::get("/powers","Admins\PowersController@powers");
+    
+    //修改权限
+    Route::get("/powers/{id}/{lock}","Admins\PowersController@update");
 
-        // 用户角色
-        Route::resource('users', 'Admins\UsersController');
+    // 用户角色
+    Route::resource('users', 'Admins\UsersController');
 
     });
 

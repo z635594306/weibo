@@ -54,13 +54,15 @@ class ActiveController extends Controller
                 ->where('id', $resource->id)
                 ->delete();
             //创建用户基本信息
-            DB::table('user_info')->insert(
+            $id = DB::table('user_info')->insertGetId(
                     ['nickname' => 'XDL_'.time(),
                      'face50' => 'face50.jpg',
                      'face100' => 'face100.jpg',
                      'login_id' => $resource->login_id
                     ]
                 );
+
+            DB::table('user_vip')->insert(['user_id'=>$id, 'creattime'=>0, 'endtime'=>0]);
         });
 
         //激活成功

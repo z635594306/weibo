@@ -1,5 +1,5 @@
 <!-- **************************************************左边********************************************** -->
-<div id="cs_left_couplet" style="display:none; position: fixed; overflow: hidden; left: 57.5px; top: 88.5px; width: 120px; height: 320px; z-index: 2147483647;">
+<div id="cs_left_couplet" style="display:none; position: fixed; overflow: hidden; left: 57.5px; top: 150px; width: 120px; height: 320px; z-index: 2147483647;">
     <div style="margin: 0px; padding: 0px; width: 120px; height: 300px;">
         <div style="position: absolute; z-index: 2; width: 26px; height: 12px; top: 287px; background: url(&quot;http://img.twcczhu.com/html/click/adtag.png&quot;) no-repeat;">
             
@@ -32,7 +32,7 @@
 
 
 <!-- ***************************************************右边******************************************* -->
-<div id="cs_right_couplet" style="display:none;position: fixed; overflow: hidden; right: 57.5px; top: 88.5px; width: 120px; height: 320px; z-index: 2147483647;">
+<div id="cs_right_couplet" style="display:none;position: fixed; overflow: hidden; right: 57.5px; top: 150px; width: 120px; height: 320px; z-index: 2147483647;">
     <div style="margin: 0px; padding: 0px; width: 120px; height: 300px;">
         <div style="position: absolute; z-index: 2; width: 26px; height: 12px; top: 287px; background: url(&quot;http://img.twcczhu.com/html/click/adtag.png&quot;) no-repeat;">
             

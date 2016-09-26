@@ -68,7 +68,7 @@
                                 </div>
                                 <div class="row weibo-btn-box">
                                     <div id="keep-btn-{{ $weibo->id }}" onclick="keep({{ $weibo->id }},{{ session('userInfo')->id }})">收藏 <span>{{ $weibo->keep }}</span></div>
-                                    <div id="comment-btn-{{ $weibo->id }}" onclick="comment({{ $weibo->id }},{{ session('userInfo')->id }})">评论 <span>{{ $weibo->comment }}</span></div>
+                                    <div id="comment-box-btn-{{ $weibo->id }}" onclick="comment({{ $weibo->id }},{{ session('userInfo')->id }})">评论 <span>{{ $weibo->comment }}</span></div>
                                     <div id="praise-btn-{{ $weibo->id }}" onclick="praise({{ $weibo->id }},{{ session('userInfo')->id }})">赞 <span>{{ $weibo->praise }}</span></div>
                                 </div>
                             </div>

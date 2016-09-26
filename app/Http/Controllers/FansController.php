@@ -104,7 +104,6 @@ class FansController extends Controller
 
         $follow = DB::table('fans')
             ->join('user_info', 'user_info.id', '=', 'fans.my_id')
-
             ->where('follow_id', $my_id)
             ->whereNotIn('fans.id', $arr)
             ->select('user_info.*','fans.*')

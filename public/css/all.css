@@ -112,7 +112,7 @@ body{
     background: #eee;
 }
 
-#top-nuv li{
+#top-nuv>li{
     float: left;
     margin-left: 50px;
     line-height: 48px;

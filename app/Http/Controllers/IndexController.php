@@ -34,17 +34,31 @@ class IndexController extends Controller
             $userInfo = DB::table('user_info')->where('id', $userInfo->id)->first();
 
             session::set('userInfo', $userInfo);
+            //查询用户微博
             $weibos = DB::table('weibo')
                 ->where('user_id','=',session::get('userInfo')->id)
                 ->where('lock', 0)
                 ->join('user_info', function($join){
                     $join->on('weibo.user_id', '=', 'user_info.id');
                 })
-                ->select('weibo.*', 'user_info.nickname')
-                ->orderBy('time', 'desc')
-                ->orderBy('comment', 'desc')
+                ->select('user_info.*', 'weibo.*')
+                ->orderBy('weibo.time', 'desc')
                 ->simplePaginate(10);
 
+            $num = 10-count($weibos);
+            //查询粉丝微博
+            $last = DB::table('fans')
+                ->join('user_info', 'user_info.id', '=', 'fans.follow_id')
+                ->join('weibo', 'weibo.user_id', '=', 'user_info.id')
+                ->where('fans.my_id',session::get('userInfo')->id)
+                ->where('weibo.lock', 0)
+                ->select('user_info.*', 'weibo.*')
+                ->orderBy('weibo.time', 'desc')
+                ->simplePaginate(10);
+
+            foreach ($last as $k => $v) {
+                $weibos[] = $v;
+            }
                 //处理时间
                 foreach ($weibos as $k => $v) {
                     $time = $weibos[$k]->time;
@@ -72,7 +86,7 @@ class IndexController extends Controller
                 ->join('user_info', function($join){
                     $join->on('weibo.user_id', '=', 'user_info.id');
                 })
-                ->select('weibo.*', 'user_info.nickname')
+                ->select('user_info.*', 'weibo.*')
                 ->orderBy('time', 'desc')
                 ->simplePaginate(10);
 
@@ -95,6 +109,31 @@ class IndexController extends Controller
             }
         }
         
+    }
+
+
+    public function findWeibo(Request $request)
+    {
+        // $find = '农村';
+        $find = $request->input('find');
+        $weibos = DB::table('weibo')
+            ->where('lock', 0)
+            ->where('content', 'like', '%'.$find.'%')
+            ->join('user_info', 'user_info.id', '=', 'weibo.user_id')
+            ->select('user_info.*', 'weibo.*')
+            ->get();
+
+        foreach ($weibos as $k => $v) {
+            $time = $weibos[$k]->time;
+            if (date('Yjn') == date('Yjn',$time)) {
+                $weibos[$k]->time = ' 今天 '.date(' H:i ', $weibos[$k]->time);
+            }elseif(date('Y') == date('Y',$weibos[$k]->time)){
+                $weibos[$k]->time = date(' n月j日 H:i ', $weibos[$k]->time);
+            }else{
+                $weibos[$k]->time = date(' Y年n月j日 ', $weibos[$k]->time);
+            }
+        }
+        return view('home.index',['weibos' => $weibos]);
     }
 
 }

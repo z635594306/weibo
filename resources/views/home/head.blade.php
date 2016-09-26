@@ -8,12 +8,12 @@
             <!-- logo-end -->
             <!-- search -->
             <div class="col-md-4">
-                <form class="form-horizontal col-md-12">
+                <form class="form-horizontal col-md-12" action="{{ URL('/find') }}" method="get">
                   <div class="form-group" style="margin-bottom: 0px;">
                     <div class="input-group col-md-12" style="margin-top: 7px;">
-                        <input type="text" class="form-control" id="search" placeholder="大家都在搜：天凉别感冒">
+                        <input type="text" name="find" class="form-control" placeholder="大家都在搜：天凉别感冒">
                         <span class="input-group-btn">  
-                            <button class="btn btn-default" id="test-button" type="button"><span class="glyphicon glyphicon-search"></span></button>  
+                            <button class="btn btn-default" id="find-btn" type="submit"><span class="glyphicon glyphicon-search"></span></button>  
                         </span>
                     </div>
                   </div>
@@ -25,7 +25,14 @@
                     <li><a href="{{ URL('') }}"><span class="glyphicon glyphicon-home nuv-ico"> </span> 首页 </a></li>
                     @if(session('userInfo'))
                         <li><a href="">{{ session('userInfo')->nickname }}</a></li>
-                        <li><a href=""><span class="glyphicon glyphicon-th nuv-ico"> </span></a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"> </span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#">修改资料</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">退出</a></li>
+                            </ul>
+                        </li>
                     @else
                         <li><a href="{{ URL('/reg') }}">注册</a></li>
                         <li><span id="login-btn" data-toggle="modal" data-target="#login">登陆</span></li>
