@@ -35,7 +35,7 @@ $('#published').click(function(){
                 str += '<li id="weibo-'+data[0].id+'" onmousemove="showDel('+data[0].id+')" onmouseout="hideDel('+data[0].id+')" style="display:none">';
                 str += '<div class=" col-md-12 weibo-content">';
                 str += '<div class="row"><div class="weibo-face-box pull-left">';
-                str += '<a href=""><img src="./imgs/face.jpg" class="weibo-face"></a></div>';
+                str += '<a href=""><img src="./imgs/face.jpg" class="face-50"></a></div>';
                 str += '<div class="weibo-content-box pull-right">';
                 str += '<a href=""><b>'+data[1].nickname+'</b></a>';
                 str += '<button id="weibo-del-'+data[0].id+'" onclick="delWeibo('+data[0].id+')" class="hidden pull-right weibo-del-btn btn btn-danger btn-xs" style="display:none">删除</button>';
@@ -144,7 +144,7 @@ function getWeiboLogin(){
                     str += '<li id="weibo-'+data.data[i].id+'" onmousemove="showDel('+data.data[i].id+')" onmouseout="hideDel('+data.data[i].id+')">';
                     str += '<div class=" col-md-12 weibo-content">';
                     str += '<div class="row"><div class="weibo-face-box pull-left">';
-                    str += '<a href=""><img src="./imgs/face.jpg" class="weibo-face"></a></div>';
+                    str += '<a href=""><img src="./imgs/face.jpg" class="face-50"></a></div>';
                     str += '<div class="weibo-content-box pull-right">';
                     str += '<a href=""><b>'+data.data[i].nickname+'</b></a>'
                     if (data.data[i].user_id == UserInfoId) {
@@ -381,7 +381,7 @@ function lookPraise(){
                     str += '<li id="weibo-'+data[i].id+'" onmousemove="showDel('+data[i].id+')" onmouseout="hideDel('+data[i].id+')">';
                     str += '<div class=" col-md-12 weibo-content">';
                     str += '<div class="row"><div class="weibo-face-box pull-left">';
-                    str += '<a href=""><img src="./imgs/face.jpg" class="weibo-face"></a></div>';
+                    str += '<a href=""><img src="./imgs/face.jpg" class="face-50"></a></div>';
                     str += '<div class="weibo-content-box pull-right">';
                     str += '<a href=""><b>'+data[i].nickname+'</b></a>'
                     if (data[i].uid == UserInfoId) {
@@ -483,7 +483,7 @@ function lookKeep(){
                     str += '<li id="weibo-'+data[i].id+'" onmousemove="showDel('+data[i].id+')" onmouseout="hideDel('+data[i].id+')">';
                     str += '<div class=" col-md-12 weibo-content">';
                     str += '<div class="row"><div class="weibo-face-box pull-left">';
-                    str += '<a href=""><img src="./imgs/face.jpg" class="weibo-face"></a></div>';
+                    str += '<a href=""><img src="./imgs/face.jpg" class="face-50"></a></div>';
                     str += '<div class="weibo-content-box pull-right">';
                     str += '<a href=""><b>'+data[i].nickname+'</b></a>'
                     if (data[i].uid == UserInfoId) {

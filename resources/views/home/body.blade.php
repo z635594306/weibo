@@ -13,8 +13,8 @@
                         <li onclick="f5()">首页</li>
                         <li onclick="lookKeep()">我的收藏</li>
                         <li onclick="lookPraise()">我的赞</li>
-                        <li>我的关注</li>
-                        <li>我的粉丝</li>
+                        <li onclick="lookFollow()">我的关注</li>
+                        <li onclick="lookFans()">我的粉丝</li>
                     @else
                         <li><span class="glyphicon glyphicon-heart"> </span>&nbsp;&nbsp; 推荐 </li>
                         <li><span class="glyphicon glyphicon-user"> </span>&nbsp;&nbsp;  明星 </li>
@@ -47,13 +47,14 @@
                         </div>
                     </li>
                     <!-- 展示发博框 -->
+
                     <!-- 遍历个人微博 -->
                     @foreach ($weibos as $weibo)
                         <li id="weibo-{{ $weibo->id }}" onmousemove="showDel({{ $weibo->id }})" onmouseout="hideDel({{ $weibo->id }})">
                             <div class=" col-md-12 weibo-content">
                                 <div class="row">
                                     <div class="weibo-face-box pull-left">
-                                        <a href=""><img src="{{ asset('imgs/face.jpg') }}" class="weibo-face"></a>
+                                        <a href=""><img src="{{ asset('imgs/face.jpg') }}" class="face-50"></a>
                                     </div>
                                     <div class="weibo-content-box pull-right">
                                         <a href=""><b>{{ $weibo->nickname }}</b></a>
@@ -120,26 +121,23 @@
 
             <!-- 右侧菜单开始 -->
             <div class="col-md-3 hidden-xs" id="hot-box">
-                <!-- 热门话题开始 -->
+                <!-- 个人信息开始 -->
+                @if(session('userInfo'))
                 <div class="row">
                     <div class="col-md-12" id="hot-talk-list">
-<!--                         <ul id="talk-list">
-                            <li><a href="">#王宝强离婚#</a> <span class="pull-right">300万</span></li>
-                            <li><a href="">#王宝强离婚#</a> <span class="pull-right">300万</span></li>
-                            <li><a href="">#王宝强离婚#</a> <span class="pull-right">300万</span></li>
-                            <li><a href="">#王宝强离婚#</a> <span class="pull-right">300万</span></li>
-                            <li><a href="">#王宝强离婚#</a> <span class="pull-right">300万</span></li>
-                            <li><a href="">#王宝强离婚#</a> <span class="pull-right">300万</span></li>
-                            <li><a href="">#王宝强离婚#</a> <span class="pull-right">300万</span></li>
-                            <li><a href="">#王宝强离婚#</a> <span class="pull-right">300万</span></li>
-                            <li><a href="">#王宝强离婚#</a> <span class="pull-right">300万</span></li>
-                        </ul> -->
+                        <div class="weibo-face-box my-face-box center-block"><img src="holder.js/100x100" class="face-100"></div>
+                    </div>
+                    <div class="col-md-12">
+                        <div id="my-name" class="center-block"><b>{{ session('userInfo')->nickname }}</b></div>
                     </div>
                     <div class="col-md-12" id="hot-talk-more">
-                        <a href="" class="hv-orange">查看更多 ></a>
+                        <div class="myInfo-count"><b>{{ session('userInfo')->weibo }}</b><br>微博</div>
+                        <div class="myInfo-count"><b>{{ session('userInfo')->follow }}</b><br>关注</div>
+                        <div class="myInfo-count"><b>{{ session('userInfo')->fans }}</b><br>粉丝</div>
                     </div>
                 </div>
-                <!-- 热门话题结束 -->
+                @endif
+                <!-- 个人信息结束 -->
 
                 <!-- 热门人物开始 -->
                 <div class="row">
@@ -148,11 +146,24 @@
                     </div>
                     <div class="col-md-12" id="hot-talk-list">
                         <ul class="top-person-list">
-                            <li class="top-person"><a href=""><div class="face-box-sm"><img src="{{ asset('imgs/face.jpg') }}" width="50px" height="50px"></div></a></li>
-                            <li class="top-person"><a href=""><div class="face-box-sm"><img src="{{ asset('imgs/face.jpg') }}" width="50px" height="50px"></div></a></li>
-                            <li class="top-person"><a href=""><div class="face-box-sm"><img src="{{ asset('imgs/face.jpg') }}" width="50px" height="50px"></div></a></li>
-                            <li class="top-person"><a href=""><div class="face-box-sm"><img src="{{ asset('imgs/face.jpg') }}" width="50px" height="50px"></div></a></li>
-                            <li class="top-person"><a href=""><div class="face-box-sm"><img src="{{ asset('imgs/face.jpg') }}" width="50px" height="50px"></div></a></li>
+                        @foreach(session('hotPerson') as $hot_person)
+                                <li class="top-person">
+                                    <a href="">
+                                        <div class="weibo-face-box pull-left"><img src="{{ asset('imgs/face.jpg') }}" class="face-50"></div>
+                                        <div class="hot-person-info pull-left">
+                                            <b class="person-nickname">{{ $hot_person->nickname }}</b><br>
+                                            <span>粉丝数：</span><span class="person-fans">{{ $hot_person->fans }}</span>
+                                        </div>
+                                    </a>
+                                        <div class="pull-right person-btn-box">
+                                        @if(session('userInfo'))
+                                            <button class="btn btn-info btn-xs" id="fans-btn-{{ $hot_person->id }}" onclick="addFollow({{ session('userInfo')->id }}, {{ $hot_person->id }})">关注</button>
+                                        @else
+                                            <button class="btn btn-info btn-xs" id="fans-btn-{{ $hot_person->id }}" onclick="addFollow(0, {{ $hot_person->id }})">关注</button>
+                                        @endif
+                                        </div>
+                                </li>
+                            @endforeach
                         </ul>
                     </div>
                     <div class="col-md-12" id="hot-talk-more">

@@ -41,6 +41,11 @@
     Route::post('/keep/del', 'KeepController@Delkeep');
     Route::post('/keep', 'KeepController@show');
 
+//关注与粉丝
+    Route::post('/follow/add', 'FansController@AddFollow');
+    Route::post('/follow/del', 'FansController@DelFollow');
+    Route::post('/follow/look', 'FansController@LookFollow');
+    Route::post('/fans/look', 'FansController@LookFans');
 
 
 /*-----------------------------小模块------------------------------------------*/

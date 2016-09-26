@@ -14,5 +14,6 @@
 @section('my-js')
     <script type="text/javascript" src="{{ asset('js/home/login.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/home/weibo.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/home/advertising.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/home/fans.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/home/advertising.js') }}"></script>  
 @stop

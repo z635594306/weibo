@@ -258,6 +258,7 @@ body{
 .top-person{
     border-bottom: 1px solid #ccc;
     padding-bottom: 10px;
+    height: 60px;
 }
 
 .top-person:nth-last-of-type(1){
@@ -330,10 +331,7 @@ body{
 .weibo-face-box{
     overflow: hidden;
     border-radius: 50%;
-    /*border:1px solid red;*/
-    width: 50px;
-    height:50px;
-    display: inline-block;
+    display: table;
 }
 
 .weibo-content-box{
@@ -421,9 +419,19 @@ body{
     margin-bottom: 10px;
 }
 
-.weibo-face{
+.face-50{
     width: 50px;
     height: 50px;
+}
+
+.face-100{
+    width: 100px;
+    height: 100px;
+}
+
+.face-30{
+    width: 30px;
+    height: 30px;
 }
 
 .wb-comment-face{
@@ -455,4 +463,85 @@ body{
     font-size: 12px;
     color:#808080;
     margin-left: 10px;
+}
+
+
+.myInfo-count{
+    width:31%;
+    display: inline-block;
+    text-align: center;
+    line-height: 20px;
+    color:#808080;
+    font-size:12px;
+    margin-top: 10px;
+    border-right: 1px solid #ccc;
+    padding-right: 8px;
+    margin-bottom: 10px;
+}
+
+.myInfo-count:last-child{
+    border-right: none;
+}
+
+.myInfo-count:first-child{
+    margin-left: 5px;
+}
+
+
+
+.myInfo-count b{
+    color: #000;
+    font-size: 18px;
+}
+
+.myInfo-count:hover b{
+    color:#ED741C;
+}
+
+.myInfo-count:hover{
+    cursor:pointer;
+}
+
+.my-face-box{
+    width: 100px;
+    margin-top: 10px;
+}
+
+#my-name{
+    display: table;
+    margin-bottom: 10px;
+    font-size: 16px;
+    font-family: 微软雅黑;
+    color: #444444;
+}
+
+#my-name:hover{
+    color:#ED741C;
+    cursor:pointer;
+}
+
+.hot-person-info{
+    line-height: 25px;
+    margin-left: 10px;
+    width: 80px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+}
+
+.hot-person-info-big{
+    line-height: 25px;
+    margin-left: 10px;
+    width: 380px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+}
+
+.person-btn-box{
+    margin-top: 10px;
+}
+
+.person-btn-box-big{
+    margin-top: 20px;
 }

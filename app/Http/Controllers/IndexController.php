@@ -20,10 +20,20 @@ class IndexController extends Controller
     */
     public function index($page=0)
     {
+
+        $hotPersons = DB::table('user_info')
+            ->orderBy('fans', 'desc')
+            ->take(8)
+            ->get();
+        // dd($hotPersons);
+        session::set('hotPerson', $hotPersons);
+
         //判断用户session是否为空,不为空显示用户及粉丝微博
         $userInfo = session::get('userInfo');
         if (!empty($userInfo)) {
+            $userInfo = DB::table('user_info')->where('id', $userInfo->id)->first();
 
+            session::set('userInfo', $userInfo);
             $weibos = DB::table('weibo')
                 ->where('user_id','=',session::get('userInfo')->id)
                 ->where('lock', 0)
@@ -55,6 +65,7 @@ class IndexController extends Controller
 
         }else{
 
+
             //如果为空,遍历全部微博
             $weibos = DB::table('weibo')
                 ->where('lock', 0)
@@ -85,8 +96,5 @@ class IndexController extends Controller
         }
         
     }
-
-
-    
 
 }
